@@ -1,0 +1,8 @@
+
+cd spring-boot-backend
+
+echo "Hello arjun"
+
+mvn --version
+
+cd spring-boot-backend && mvn clean install && cd target && java -jar spring-boot-backend-0.0.1-SNAPSHOT.jar
