@@ -33,6 +33,15 @@ frontend/.env.production.local
 frontend/.idea
 frontend/.vscode/
 
+# Miscellaneous
+frontend/.angular/cache
+frontend/.sass-cache/
+frontend/connect.lock
+frontend/coverage
+frontend/libpeerconnection.log
+frontend/testem.log
+frontend/typings
+
 # Global IDE/editor files
 .DS_Store
 Thumbs.db
