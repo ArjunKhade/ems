@@ -1,0 +1,20 @@
+<div class="header">
+       <form class="d-flex" role="search">
+              <input class="form-control me-2" (input)="onSearch($event)" type="search" placeholder="Search"
+                     aria-label="Search" />
+       </form>
+
+       <div style="grid-column: 6;" class="login">
+              <img src="avatar.png" alt="User Avatar" class="avatar-img" />
+
+              <button class="login-btn" (click)="login()">
+                     @if(user){
+                     {{user}}
+                     }@else {
+
+                     Login
+                     }
+              </button>
+       </div>
+
+</div>

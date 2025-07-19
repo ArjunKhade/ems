@@ -1,0 +1,50 @@
+<mat-card class="form">
+    <h2 class="heading">Registration form</h2>
+
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+
+        
+        <div class="name-input" *ngIf="registrationForm.get('id')">
+            <input id="name" formControlName="id" matInput  placeholder="Employee Id" />
+            <mat-error
+                *ngIf="registrationForm.get('id')?.touched && registrationForm.get('id')?.hasError('required')">
+                Id is required
+            </mat-error>
+        </div>
+        
+        <div class="name-input">
+            <input id="name" formControlName="name" matInput  placeholder="Name" />
+            <mat-error
+                *ngIf="registrationForm.get('name')?.touched && registrationForm.get('name')?.hasError('required')">
+                Name is required
+            </mat-error>
+        </div>
+
+         
+
+        <div class="location">
+            <input id="location" formControlName="location" matInput required placeholder="Location" />
+            <mat-error
+                *ngIf="registrationForm.get('location')?.touched && registrationForm.get('location')?.hasError('required')">
+                Location is required
+            </mat-error>
+        </div>
+
+        <div class="department">
+            <input id="department" formControlName="department" matInput required placeholder="Department" />
+            <mat-error
+                *ngIf="registrationForm.get('department')?.touched && registrationForm.get('department')?.hasError('required')">
+                Department is required
+            </mat-error>
+        </div>
+
+       
+        <div class="btn">
+            <button class="submit" type="submit" [disabled]="!registrationForm.valid" role="button">Submit</button>
+         
+        </div>
+    </form>
+   
+</mat-card>
+
+<app-spinner></app-spinner>

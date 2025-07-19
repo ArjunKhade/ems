@@ -1,0 +1,19 @@
+<div class="contain-block">
+    <app-header class="header"></app-header>
+
+    <div class="content-box">
+        <app-side-nav class="side-nav"></app-side-nav>
+
+        <!-- <div class="content">
+            <router-outlet></router-outlet>
+        </div> -->
+
+        <div class="content">
+            <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
+        </div>
+
+    </div>
+
+ 
+    <app-footer class="footer"></app-footer>
+</div>

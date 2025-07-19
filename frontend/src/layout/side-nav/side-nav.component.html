@@ -1,0 +1,20 @@
+<div class="sidebar">
+    <div class="toggle">
+        <button (click)="toggleSidebar()" class="toggle-btn">
+            <i class="fa" [ngClass]="isCollapsed ? 'fa-bars' : 'fa-bars'" aria-hidden="true"></i>
+        </button>
+    </div>
+
+    <nav class="nav" [class.collapsed]="isCollapsed">
+
+        <button mat-flat-button (click)="navigateTo('employees')">
+            <i *ngIf="isCollapsed" class="fa fa-users" aria-hidden="true"></i>
+            <span *ngIf="!isCollapsed">Employee Details</span>
+        </button>
+
+        <button mat-flat-button (click)="navigateTo('employees/form/0')">
+            <i *ngIf="isCollapsed" class="fa fa-user-plus" aria-hidden="true"></i>
+            <span *ngIf="!isCollapsed">Add Employee</span>
+        </button>
+    </nav>
+</div>

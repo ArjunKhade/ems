@@ -1,0 +1,24 @@
+.header {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(6, 1fr);
+}
+
+.header form {
+    grid-column: 2/5;
+}
+
+.login button {
+    border: none;
+    color: black;
+    font-size: 16px;
+    background-color: white;
+    font-weight: 500;
+}
+
+.avatar-img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}

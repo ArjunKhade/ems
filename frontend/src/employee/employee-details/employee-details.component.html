@@ -1,0 +1,51 @@
+<app-main-template [contentTemplate]="myTemplate">
+</app-main-template>
+
+<ng-template #myTemplate>
+  <div class="table">
+    <div class="add-btn">
+      <button (click)="addEmployee()">Add Employee</button>
+    </div>
+
+    <div class="table-container">
+      <table class="employee-table" matSort (matSortChange)="sortData($event)" *ngIf="employees.length > 0">
+        <thead>
+          <tr>
+            <th mat-sort-header="name">Name</th>
+            <th mat-sort-header="location">Location</th>
+            <th mat-sort-header="department">Department</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let emp of employees; let i = index">
+            <td>{{ emp.name }}</td>
+            <td>{{ emp.location }}</td>
+            <td>{{ emp.department }}</td>
+            <td class="actions">
+              <i (click)="update(emp)" class="fas fa-edit"></i>
+              <i (click)="delete(emp.id)" class="fa fa-trash" aria-hidden="true"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+  <ng-container *ngIf="isHandset | async">Mobile View</ng-container>
+  <ng-container *ngIf="isTablet | async">Tablet View</ng-container>
+  <ng-container *ngIf="isWeb | async">Web View</ng-container>
+
+</ng-template>
+
+<!-- <ngx-spinner
+  bdColor="rgba(0, 0, 0, 1)"
+  template="<img  src='https://media.giphy.com/media/o8igknyuKs6aY/giphy.gif' />"
+>
+</ngx-spinner> -->
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-atom" [fullScreen]="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>
+<!-- <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-square-spin" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner> -->
+<!-- <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner> -->
