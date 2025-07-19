@@ -1,12 +1,11 @@
 package com.app.service;
-
+import java.util.HashSet;
 import java.util.Optional;
-
+import java.util.Set;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import com.app.dao.RoleRepository;
 import com.app.dao.UserRepository;
 import com.app.dto.ApiResponse;
@@ -37,9 +36,27 @@ public class UserService implements IUserService {
 	private ModelMapper modelMapper;
 	
 	@Override
-	public User addUser(User user) {
+	public User addUser(UserSignupRequest request) {
+		User user= new User();
+		user.setName(request.getName());
+		user.setEmail(request.getEmail());
+
+		String roleStr = request.getRole(); // e.g., "ADMIN"
+		
+		 // Convert String to Enum
+		UserRole roleEnum = UserRole.valueOf(roleStr.toUpperCase());
+		
+		  // Fetch Role entity from DB
+        Role roleEntity = roleRepo.findByRole(roleEnum)
+                .orElseThrow(() -> new RuntimeException("Role not found: " + roleEnum));
+		
+		 // Set role to user
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleEntity);
+        user.setRoles(roles);
+		
 		user.setActive(true);
-		user.setPassword(encoder.encode(user.getPassword()));
+		user.setPassword(encoder.encode(request.getPassword()));
 		return  usersRepo.save(user);
 	}
 	

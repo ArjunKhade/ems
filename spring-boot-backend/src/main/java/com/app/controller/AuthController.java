@@ -22,53 +22,54 @@ import com.app.service.IUserService;
 import jakarta.annotation.security.PermitAll;
 import jakarta.validation.Valid;
 
-
 @RestController
 @RequestMapping("/auth")
 @CrossOrigin("*")
 @PermitAll
 public class AuthController {
-	
-         @Autowired
-         private JwtUtils utils;
-         
-         @Autowired
-         private AuthenticationManager manager;
-         
-         @Autowired
-         private IUserService userService;
-         
-         @Autowired
-     	private ModelMapper modelMapper;
-         
-         //register new user with password encoding
-      	@PostMapping("/signup")
-      	public ResponseEntity<?>registerUser( @Valid @RequestBody  User request){
-      		System.out.println(request);
-      		 boolean findUserByEmail = userService.findUserByEmail(request.getEmail());
-      		 if(!findUserByEmail) {
-      		  return ResponseEntity.status(HttpStatus.CREATED).body(userService.addUser(request));
-      		}else {
-      			return new ResponseEntity<ApiResponse>(new ApiResponse("Duplicate User Entry Email Id Already Exist!!!!"),HttpStatus.BAD_REQUEST);
-     		}
-      		 
-      	}
-         
-   
-     @PostMapping("/login")
-     public ResponseEntity<?> validateUserCreateToken(@Valid @RequestBody  UserLoginRequest request){
-    	 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword());
-    	 try {
- 			// authenticate the credentials
- 			Authentication authenticatedDetails = manager.authenticate(authToken);
- 			// => auth succcess
- 			User user = userService.getUserByEmail(request.getEmail());
- 			return ResponseEntity.ok(new AuthResp(utils.generateJwtToken(authenticatedDetails),user.getId(),user.getName()));
- 		} catch (BadCredentialsException e) { // lab work : replace this by a method in global exc handler
- 			// send back err resp code
- 			System.out.println("err "+e);
- 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
- 		}
-     }
-         
+
+	@Autowired
+	private JwtUtils utils;
+
+	@Autowired
+	private AuthenticationManager manager;
+
+	@Autowired
+	private IUserService userService;
+
+	@Autowired
+	private ModelMapper modelMapper;
+
+	// register new user with password encoding
+	@PostMapping("/signup")
+	public ResponseEntity<?> registerUser(@Valid @RequestBody UserSignupRequest request) {
+		System.out.println(request);
+		boolean findUserByEmail = userService.findUserByEmail(request.getEmail());
+		if (!findUserByEmail) {
+			return ResponseEntity.status(HttpStatus.CREATED).body(userService.addUser(request));
+		} else {
+			return new ResponseEntity<ApiResponse>(new ApiResponse("Duplicate User Entry Email Id Already Exist!!!!"),
+					HttpStatus.BAD_REQUEST);
+		}
+
+	}
+
+	@PostMapping("/login")
+	public ResponseEntity<?> validateUserCreateToken(@Valid @RequestBody UserLoginRequest request) {
+		UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(request.getEmail(),
+				request.getPassword());
+		try {
+			// authenticate the credentials
+			Authentication authenticatedDetails = manager.authenticate(authToken);
+			// => auth succcess
+			User user = userService.getUserByEmail(request.getEmail());
+			return ResponseEntity
+					.ok(new AuthResp(utils.generateJwtToken(authenticatedDetails), user.getId(), user.getName()));
+		} catch (BadCredentialsException e) { // lab work : replace this by a method in global exc handler
+			// send back err resp code
+			System.out.println("err " + e);
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+		}
+	}
+
 }

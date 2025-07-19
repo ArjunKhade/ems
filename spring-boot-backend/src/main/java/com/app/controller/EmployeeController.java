@@ -37,7 +37,7 @@ public class EmployeeController {
 	//add request handling method
 	@Operation(summary = "Returns list of all employess")
 	@GetMapping
-	@PreAuthorize("hasRole('ADMIN')")
+//	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<List<Employee>> getAllEmpDetails(){
 		return new ResponseEntity<> (empService.getAllEmployees(),HttpStatus.OK);
 	}
