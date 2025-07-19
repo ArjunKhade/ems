@@ -1,0 +1,39 @@
+# Ignore backend build and IDE files
+spring-boot-backend/HELP.md
+spring-boot-backend/target/
+spring-boot-backend/.mvn/wrapper/maven-wrapper.jar
+spring-boot-backend/.apt_generated
+spring-boot-backend/.classpath
+spring-boot-backend/.factorypath
+spring-boot-backend/.project
+spring-boot-backend/.settings
+spring-boot-backend/.springBeans
+spring-boot-backend/.sts4-cache
+spring-boot-backend/.idea
+spring-boot-backend/*.iws
+spring-boot-backend/*.iml
+spring-boot-backend/*.ipr
+spring-boot-backend/nbproject/private/
+spring-boot-backend/nbbuild/
+spring-boot-backend/dist/
+spring-boot-backend/nbdist/
+spring-boot-backend/.nb-gradle/
+spring-boot-backend/build/
+spring-boot-backend/.vscode/
+
+# Ignore frontend build and IDE files (adjust folder name if needed)
+frontend/node_modules/
+frontend/build/
+frontend/dist/
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.test.local
+frontend/.env.production.local
+frontend/.idea
+frontend/.vscode/
+
+# Global IDE/editor files
+.DS_Store
+Thumbs.db
+*.log
