@@ -11,6 +11,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>spring-boot-backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>spring-boot-backend</name>
 	<description>Demo spring-boot-backend api</description>
 	<url/>
