@@ -14,17 +14,17 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { EmployeeService } from './employee.service';
 import { SweetAlertService } from '../../app/common/sweet-alert.service';
-import { LoaderService } from '../../components/spinner/loader.service';
 import { SpinnerComponent } from "../../components/spinner/spinner.component";
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-add-employee',
   standalone: true,
   providers: [provideNativeDateAdapter()],
-  imports: [CommonModule, RouterModule, MatFormFieldModule,
-    MatInputModule, MatDatepickerModule, SpinnerComponent,
+  imports: [NgxSpinnerModule,CommonModule, RouterModule, MatFormFieldModule,
+    MatInputModule, MatDatepickerModule,
     MatSelectModule, MatNativeDateModule, MatCardModule, MatAutocompleteModule,
-    ReactiveFormsModule, FormsModule, MatButtonModule, MatDialogModule, SpinnerComponent],
+    ReactiveFormsModule, FormsModule, MatButtonModule, MatDialogModule],
   templateUrl: './add-employee.component.html',
   styleUrl: './add-employee.component.scss'
 })
@@ -39,15 +39,15 @@ export class AddEmployeeComponent implements OnInit {
   constructor(
     private empService: EmployeeService,
     private router: Router,
+    private spinnerService: NgxSpinnerService,
     private route: ActivatedRoute,
     private sweetAlertService: SweetAlertService,
-    private loaderService: LoaderService
+    // private loaderService: LoaderService
   ) {
 
   }
 
   ngOnInit(): void {
-
 
     this.empId = Number(this.route.snapshot.paramMap.get("id"));
     this.createForm();
@@ -72,7 +72,8 @@ export class AddEmployeeComponent implements OnInit {
 
   onSubmit() {
     if (this.registrationForm.valid) {
-      this.loaderService.show();
+          this.spinnerService.show();
+
       //edit case
       if (this.HasId) {
         this.empService.updateEmployee(this.registrationForm.value, this.empId).subscribe({
@@ -82,16 +83,19 @@ export class AddEmployeeComponent implements OnInit {
             this.sweetAlertService.showSuccess('Employee updated successfully!');
             this.registrationForm.reset();
             this.router.navigate(['/employees']);
-            this.loaderService.hide();
+                    this.spinnerService.hide();
+
           },
           error: e => {
             console.error('Error while updating employee', e);
-            this.loaderService.hide();
+                    this.spinnerService.hide();
+
           }
         })
       } else {
         // add case
-        this.loaderService.show();
+           this.spinnerService.show();
+
         this.empService.addEmployee(this.registrationForm.value).subscribe({
 
           next: response => {
@@ -99,11 +103,13 @@ export class AddEmployeeComponent implements OnInit {
             this.sweetAlertService.showSuccess('Employee added successfully');
             this.registrationForm.reset();
             this.router.navigate(['/employees']);
-            this.loaderService.hide();
+                    this.spinnerService.hide();
+
           },
           error: error => {
             console.error('Error adding employee', error);
-            this.loaderService.hide();
+                    this.spinnerService.hide();
+
           }
 
         })
@@ -115,7 +121,8 @@ export class AddEmployeeComponent implements OnInit {
 
 
   getEmployeeById(empId: number) {
-    this.loaderService.show();
+        this.spinnerService.show();
+
 
     this.empService.getEmployeeById(empId).subscribe({
 
@@ -128,13 +135,15 @@ export class AddEmployeeComponent implements OnInit {
           location: response.location,
           department: response.department
         });
-        this.loaderService.hide();
+                this.spinnerService.hide();
+
 
       },
 
       error: (e) => {
         console.error('Error fetching employee by ID:', e);
-        this.loaderService.hide();
+                this.spinnerService.hide();
+
       }
     })
 

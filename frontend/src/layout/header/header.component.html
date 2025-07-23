@@ -5,7 +5,7 @@
        </form>
 
        <div style="grid-column: 6;" class="login">
-              <img src="avatar.png" alt="User Avatar" class="avatar-img" />
+              <img [ngbPopover]="popContent" src="avatar.png" alt="User Avatar" class="avatar-img" />
 
               <button class="login-btn" (click)="login()">
                      @if(user){
@@ -18,3 +18,22 @@
        </div>
 
 </div>
+
+<ng-template #popContent>
+  <div class="popover-content">
+    <div class="greeting">Hello, Admin</div>
+
+    <button mat-menu-item class="logout-btn" (click)="signOut()">
+      <mat-icon>logout</mat-icon>
+      <span>Sign out</span>
+    </button>
+  </div>
+</ng-template>
+
+
+<!-- <mat-menu #userMenu="matMenu">
+  <button mat-menu-item (click)="signOut()">
+    <mat-icon>logout</mat-icon>
+    Sign out
+  </button>
+</mat-menu>  -->
