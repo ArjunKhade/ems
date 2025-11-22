@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 })
 export class SideNavComponent {
   isCollapsed = false;
-
+  @Output() sidebarToggled = new EventEmitter<boolean>();
   constructor(private router: Router, private route: ActivatedRoute) { }
 
   navigateTo(route: string) {
@@ -19,6 +19,7 @@ export class SideNavComponent {
 
   toggleSidebar() {
     this.isCollapsed = !this.isCollapsed;
+    this.sidebarToggled.emit(this.isCollapsed);  // emit current state
   }
 
 }

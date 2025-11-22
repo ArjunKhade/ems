@@ -25,6 +25,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 export class MainTemplateComponent {
 
   @Input() contentTemplate!: TemplateRef<any>;
+  isToggle: boolean = false;
   constructor(
       private spinnerService: NgxSpinnerService
     ) { 
@@ -37,5 +38,9 @@ export class MainTemplateComponent {
         this.spinnerService.hide();
       }, 5000); // 5 seconds
     }
+
+  toggleSideBar(Value:boolean){
+    this.isToggle = Value;
+  }
 
 }
