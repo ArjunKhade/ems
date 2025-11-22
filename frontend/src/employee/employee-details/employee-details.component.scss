@@ -72,10 +72,10 @@
   gap: 30px;
   justify-content: flex-start;
   align-items: center;
-  
+
 }
 
-.actions i{
+.actions i {
   font-size: 20px;
   cursor: pointer;
 }
@@ -119,18 +119,31 @@ button.delete:hover {
     padding: 10px;
     font-size: 14px;
   }
+
+  .table {
+    padding: 2px;
+  }
+
 }
 
 button.update:focus,
 button.delete:focus {
   outline: none;
   box-shadow: none;
-  /* or custom shadow as shown above */
 }
 
 
 .table-container {
-  max-height: 500px; /* adjust as needed */
+  max-height: 500px;
   overflow-y: auto;
-  border: 1px solid #ccc;
+  // border: 1px solid #ccc;
+}
+
+.noData {
+  text-align: center;
+  color: gray;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  padding: 13px 0px 0px 0px;
 }

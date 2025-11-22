@@ -8,7 +8,7 @@
     </div>
 
     <div class="table-container">
-      <table class="employee-table" matSort (matSortChange)="sortData($event)" *ngIf="employees.length > 0">
+      <table class="employee-table" matSort (matSortChange)="sortData($event)" *ngIf="employees.length > 0; else noData">
         <thead>
           <tr>
             <th mat-sort-header="name">Name</th>
@@ -29,14 +29,17 @@
           </tr>
         </tbody>
       </table>
-
     </div>
   </div>
 
-  <ng-container *ngIf="isHandset | async">Mobile View</ng-container>
+  <!-- <ng-container *ngIf="isHandset | async">Mobile View</ng-container>
   <ng-container *ngIf="isTablet | async">Tablet View</ng-container>
-  <ng-container *ngIf="isWeb | async">Web View</ng-container>
+  <ng-container *ngIf="isWeb | async">Web View</ng-container> -->
 
+</ng-template>
+
+<ng-template #noData>
+  <p class="noData">No employee data found.</p>
 </ng-template>
 
 <!-- <ngx-spinner
