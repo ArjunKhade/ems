@@ -1,19 +1,19 @@
 .header {
-    display: grid;
-    width: 100%;
-    grid-template-columns: repeat(6, 1fr);
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(6, 1fr);
 }
 
 .header form {
-    grid-column: 2/5;
+  grid-column: 2/5;
 }
 
 .login button {
-    border: none;
-    color: black;
-    font-size: 16px;
-    background-color: white;
-    font-weight: 500;
+  border: none;
+  color: black;
+  font-size: 16px;
+  background-color: white;
+  font-weight: 500;
 }
 
 .avatar-img {
@@ -30,7 +30,7 @@
   min-width: 160px;
   background-color: white;
   border-radius: 8px;
- 
+
   box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.1);
 }
 
@@ -39,7 +39,7 @@
   font-weight: 600;
   margin-bottom: 12px;
   color: #333;
-   margin-left: 8px;
+  margin-left: 8px;
 }
 
 .logout-btn {
@@ -53,3 +53,30 @@
   font-size: 20px;
 }
 
+// phones
+@media screen and (max-width: 600px) {
+
+ 
+  .search {
+    margin-top: 13px;
+    height: 6vh;
+    width: 215px;
+  }
+
+  .login {
+    display: flex;
+    grid-column: 6;
+    margin-top: auto
+  }
+
+  .login img {
+    height: 25px;
+    width: 25px;
+  }
+}
+
+// Tablets
+@media screen and (max-width: 1024px) {}
+
+// Desktops
+@media screen and (max-width: 1440px) {}

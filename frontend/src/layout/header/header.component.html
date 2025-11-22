@@ -1,6 +1,6 @@
 <div class="header">
        <form class="d-flex" role="search">
-              <input class="form-control me-2" (input)="onSearch($event)" type="search" placeholder="Search"
+              <input class="form-control me-2 search" (input)="onSearch($event)" type="search" placeholder="Search"
                      aria-label="Search" />
        </form>
 
@@ -8,20 +8,24 @@
               <img [ngbPopover]="popContent" src="avatar.png" alt="User Avatar" class="avatar-img" />
 
               <button class="login-btn" (click)="login()">
-                     @if(user){
+                     @if(!(isHandset | async)){
+                      @if(user){
                      {{user}}
                      }@else {
-
                      Login
+                     }
                      }
               </button>
        </div>
-
 </div>
 
 <ng-template #popContent>
   <div class="popover-content">
-    <div class="greeting">Hello, Admin</div>
+    <div class="greeting">Hello, Admin 
+      @if(isHandset | async){
+        {{user}}
+      }
+    </div>
 
     <button mat-menu-item class="logout-btn" (click)="signOut()">
       <mat-icon>logout</mat-icon>
