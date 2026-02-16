@@ -1,0 +1,32 @@
+
+services:
+
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: dac25
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+
+  backend:
+    container_name: backend
+    build: ./spring-boot-backend
+    depends_on:
+      - mysql
+    ports:
+      - "9090:8080"
+
+  frontend:
+    container_name: frontend
+    build: ./frontend
+    depends_on:
+      - backend
+    ports:
+      - "90:80"
+
+volumes:
+  mysql-data:
